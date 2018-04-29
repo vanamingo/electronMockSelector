@@ -1,5 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import fs from 'file-system'
 
 /**
  * @title Data table with sorting, pagination, and filtering.
@@ -17,6 +18,11 @@ export class TableOverviewExample {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor() {
+
+    fs.recurse("F:/Maxon", function(filepath, relative, filename) {
+      console.log('fs.recurse', arguments);
+     });
+
     // Create 100 users
     const users: UserData[] = [];
     for (let i = 1; i <= 100; i++) { users.push(createNewUser(i)); }
