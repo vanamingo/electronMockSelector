@@ -2,6 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import fs from 'file-system'
 
+declare var settings: any;
 /**
  * @title Data table with sorting, pagination, and filtering.
  */
@@ -19,9 +20,10 @@ export class TableOverviewExample {
 
   constructor() {
 
-    fs.recurse("F:/Maxon", function(filepath, relative, filename) {
-      console.log('fs.recurse', arguments);
-     });
+    if(settings){ console.log('global settings', settings);} else{ console.log('no settings');}
+  //  fs.recurse("F:/Maxon", function(filepath, relative, filename) {
+  //    console.log('fs.recurse', arguments);
+  //   });
 
     // Create 100 users
     const users: UserData[] = [];
