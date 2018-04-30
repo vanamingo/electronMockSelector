@@ -21,7 +21,8 @@
     let dir = 'F:/Maxon/fakes/';
     let fileArray = fs.readdirSync(dir)
       .filter(n => n.toUpperCase()
-        .endsWith('JSON'));
+        .endsWith('JSON'))
+        .map(f => {return {name: f}});
 
         return {
           dir: dir, 
