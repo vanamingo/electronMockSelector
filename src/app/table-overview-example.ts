@@ -1,8 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import fs from 'file-system'
+//import fs from 'file-system'
 
 declare var settings: MockSettings;
+declare var fs: any;
 /**
  * @title Data table with sorting, pagination, and filtering.
  */
@@ -20,7 +21,7 @@ export class TableOverviewExample {
 
   constructor() {
 
-    if(settings){ console.log('global settings', settings);} else{ console.log('no settings');}
+    if(fs){ console.log('global fs', fs);} else{ console.log('no fs');}
   //  fs.recurse("F:/Maxon", function(filepath, relative, filename) {
   //    console.log('fs.recurse', arguments);
   //   });
@@ -43,6 +44,10 @@ export class TableOverviewExample {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  selectFile(row: MockFile){
+    console.log('selected row: ', row.name);
   }
 }
 

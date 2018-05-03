@@ -11,7 +11,7 @@
     <!-- ID Column -->
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      <mat-cell *matCellDef="let row"> Hello! {{row.id}} </mat-cell>
     </ng-container>
 
     <!-- Progress Column -->
@@ -23,7 +23,13 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+      <mat-cell *matCellDef="let row">
+          <button 
+          mat-button
+          
+          >{{row.name}} me2!
+        </button>
+      </mat-cell>
     </ng-container>
 
     <!-- Color Column -->
@@ -33,7 +39,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    <mat-row (click)="selectFile(row)" *matRowDef="let row; columns: displayedColumns;">
     </mat-row>
   </mat-table>
 
