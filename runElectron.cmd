@@ -1,2 +1,2 @@
-cd F:/Maxon/Programming/electron-quick-start
+cd E:\Maximov\MockSelectorAngular\ElectronTv
 npm start

@@ -4,6 +4,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 declare var settings: MockSettings;
 declare var fs: any;
+
 /**
  * @title Data table with sorting, pagination, and filtering.
  */
@@ -15,17 +16,12 @@ declare var fs: any;
 export class TableOverviewExample {
   displayedColumns = ['name'];
   dataSource: MatTableDataSource<MockFile>;
+  selectedFile: MockFile;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor() {
-
-    if(fs){ console.log('global fs', fs);} else{ console.log('no fs');}
-  //  fs.recurse("F:/Maxon", function(filepath, relative, filename) {
-  //    console.log('fs.recurse', arguments);
-  //   });
-
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(settings.files);
@@ -47,12 +43,18 @@ export class TableOverviewExample {
   }
 
   selectFile(row: MockFile){
-    console.log('selected row: ', row.name);
+    let fullFilePath = settings.dir + row.name;
+    let destinationPath = settings.selectedDir + 'worked.json';
+    this.selectedFile = row;
+
+    fs.createReadStream(fullFilePath).pipe(fs.createWriteStream(destinationPath));
+    console.log(row.name, ' selected!');
   }
 }
 
 export interface MockSettings{
   dir: string, 
+  selectedDir: string,
   files: MockFile[]
 }
 

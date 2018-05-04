@@ -18,3 +18,15 @@
   overflow: auto;
   max-height: 500px;
 }
+
+.selected {
+  background-color: rgb(173, 230, 203) !important; 
+}
+
+.fileRow{
+  transition: background-color 0.5s;
+}
+
+.fileRow:hover{
+  background-color: orange;  
+}

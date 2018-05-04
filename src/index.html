@@ -3,13 +3,13 @@
 
 <head>
   <meta charset="utf-8">
-  <title>AngularTemplate</title>
+  <title>MBC Mock Selector</title>
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <title>gqeqpqprqxl.angular</title>
+  <title>MBC Mock Selector</title>
 
   <script>
 
@@ -18,7 +18,7 @@
     
     var settings = getSettings();
     function getSettings(){
-    let dir = 'F:/Maxon/fakes/';
+    let dir = 'C:/fakes/';
     let fileArray = fs.readdirSync(dir)
       .filter(n => n.toUpperCase()
         .endsWith('JSON'))
@@ -26,7 +26,8 @@
 
         return {
           dir: dir, 
-          files: fileArray
+          files: fileArray,
+          selectedDir: 'C:/fakes/Selected/'
         }
     }
       console.log('settings', settings);

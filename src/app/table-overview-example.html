@@ -23,27 +23,15 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-          <button 
-          mat-button
-          
-          >{{row.name}} me2!
-        </button>
-      </mat-cell>
-    </ng-container>
-
-    <!-- Color Column -->
-    <ng-container matColumnDef="color">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Color </mat-header-cell>
-      <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </mat-cell>
+      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row (click)="selectFile(row)" *matRowDef="let row; columns: displayedColumns;">
+    <mat-row (click)="selectFile(row)" [ngClass]="{'selected': selectedFile && row.name === selectedFile.name, 'fileRow': true}" *matRowDef="let row; columns: displayedColumns;">
     </mat-row>
   </mat-table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <mat-paginator [pageSize]="[100]"></mat-paginator>
 </div>
 
 
