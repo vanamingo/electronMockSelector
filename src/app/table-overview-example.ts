@@ -29,8 +29,8 @@ export class TableOverviewExample {
     console.log('Settings: ', this.settings);
   }
 
-  getSettings(){
-    
+  getSettings() {
+
     let dir = 'C:/fakes/';
     let fileArray = fs.readdirSync(dir)
       .filter(n => n.toUpperCase()
@@ -39,11 +39,20 @@ export class TableOverviewExample {
         let fullName = dir + f;
         let stat = fs.statSync(dir + f);
         return {
-          name: f, 
-          fullName:fullName,
+          name: f,
+          fullName: fullName,
           modifiedDate: stat.mtime
         }
-      });
+      })
+      .sort((a, b) => {
+        if (a.modifiedDate > b.modifiedDate) {
+          return 1;
+        }
+        if (a.modifiedDate < b.modifiedDate) {
+          return 0;
+        }
+        return 0;
+      }).reverse();
 
     return {
       dir: dir,
@@ -84,7 +93,7 @@ export interface MockSettings {
 }
 
 export interface MockFile {
-  name: string, 
+  name: string,
   fullName: string,
   modifiedDate: Date
 }
