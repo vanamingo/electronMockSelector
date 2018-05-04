@@ -26,6 +26,12 @@
       <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
     </ng-container>
 
+    
+    <ng-container matColumnDef="modifiedDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Modified Date </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.modifiedDate | date:'yyyy-MM-dd HH:mm'}}</mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row (click)="selectFile(row)" [ngClass]="{'selected': selectedFile && row.name === selectedFile.name, 'fileRow': true}" *matRowDef="let row; columns: displayedColumns;">
     </mat-row>

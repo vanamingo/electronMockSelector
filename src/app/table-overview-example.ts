@@ -13,7 +13,7 @@ declare var fs: any;
   templateUrl: 'table-overview-example.html',
 })
 export class TableOverviewExample {
-  displayedColumns = ['name'];
+  displayedColumns = ['name', 'modifiedDate'];
   dataSource: MatTableDataSource<MockFile>;
   selectedFile: MockFile;
   settings: MockSettings;
@@ -26,18 +26,22 @@ export class TableOverviewExample {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.settings.files);
 
-
+    console.log('Settings: ', this.settings);
   }
 
   getSettings(){
-    console.log('Here');
+    
     let dir = 'C:/fakes/';
     let fileArray = fs.readdirSync(dir)
       .filter(n => n.toUpperCase()
         .endsWith('JSON'))
       .map(f => {
+        let fullName = dir + f;
+        let stat = fs.statSync(dir + f);
         return {
-          name: f
+          name: f, 
+          fullName:fullName,
+          modifiedDate: stat.mtime
         }
       });
 
@@ -80,7 +84,9 @@ export interface MockSettings {
 }
 
 export interface MockFile {
-  name: string
+  name: string, 
+  fullName: string,
+  modifiedDate: Date
 }
 
 
