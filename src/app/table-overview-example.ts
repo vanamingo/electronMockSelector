@@ -1,8 +1,7 @@
-import {Component, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 //import fs from 'file-system'
 
-declare var settings: MockSettings;
 declare var fs: any;
 
 /**
@@ -17,14 +16,36 @@ export class TableOverviewExample {
   displayedColumns = ['name'];
   dataSource: MatTableDataSource<MockFile>;
   selectedFile: MockFile;
+  settings: MockSettings;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor() {
-
+    this.settings = this.getSettings();
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(settings.files);
+    this.dataSource = new MatTableDataSource(this.settings.files);
+
+
+  }
+
+  getSettings(){
+    console.log('Here');
+    let dir = 'C:/fakes/';
+    let fileArray = fs.readdirSync(dir)
+      .filter(n => n.toUpperCase()
+        .endsWith('JSON'))
+      .map(f => {
+        return {
+          name: f
+        }
+      });
+
+    return {
+      dir: dir,
+      files: fileArray,
+      selectedDir: 'C:/fakes/Selected/'
+    }
   }
 
   /**
@@ -42,9 +63,9 @@ export class TableOverviewExample {
     this.dataSource.filter = filterValue;
   }
 
-  selectFile(row: MockFile){
-    let fullFilePath = settings.dir + row.name;
-    let destinationPath = settings.selectedDir + 'worked.json';
+  selectFile(row: MockFile) {
+    let fullFilePath = this.settings.dir + row.name;
+    let destinationPath = this.settings.selectedDir + 'worked.json';
     this.selectedFile = row;
 
     fs.createReadStream(fullFilePath).pipe(fs.createWriteStream(destinationPath));
@@ -52,13 +73,13 @@ export class TableOverviewExample {
   }
 }
 
-export interface MockSettings{
-  dir: string, 
+export interface MockSettings {
+  dir: string,
   selectedDir: string,
   files: MockFile[]
 }
 
-export interface MockFile{
+export interface MockFile {
   name: string
 }
 

@@ -12,28 +12,7 @@
   <title>MBC Mock Selector</title>
 
   <script>
-
-    const fs = require('fs');
-    
-    
-    var settings = getSettings();
-    function getSettings(){
-    let dir = 'C:/fakes/';
-    let fileArray = fs.readdirSync(dir)
-      .filter(n => n.toUpperCase()
-        .endsWith('JSON'))
-        .map(f => {return {name: f}});
-
-        return {
-          dir: dir, 
-          files: fileArray,
-          selectedDir: 'C:/fakes/Selected/'
-        }
-    }
-      console.log('settings', settings);
-
-
-    
+    const fs = require('fs');    
   </script>
 
 </head>
@@ -43,7 +22,6 @@
   <div class="mat-app-background basic-container">
     <table-overview-example>loading</table-overview-example>
   </div>
-  <span class="version-info">Current build: 5.2.4</span>
 
   <!-- Copyright 2018 Google Inc. All Rights Reserved.
     Use of this source code is governed by an MIT-style license that
